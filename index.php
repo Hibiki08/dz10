@@ -1,7 +1,17 @@
 <?php
 require_once __DIR__ . '/autoload.php';
 
-$news = new News;
-$array = $news->actionAll();
+if (isset($_GET['cntr'])) {
 
-require_once __DIR__. '/views/all.php';
+    $news = $_GET['cntr'] . 'Controller';
+
+    if (file_exists(__DIR__ . '/controllers/' . $news . '.php')) {
+
+        if (isset($_GET['act'])) {
+
+            $act = 'action' . $_GET['act'];
+            $news::$act();
+        }
+    }
+}
+
