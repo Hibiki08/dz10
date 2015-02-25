@@ -2,7 +2,6 @@
 
 class SQL
 {
-
     public function __construct()
     {
         mysql_connect('localhost', 'root', '');
@@ -10,6 +9,6 @@ class SQL
     }
 
     public function query($sql) {
-        mysql_query($sql);
+        return mysql_query($sql);
     }
 }
