@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/autoload.php';
 
+NewsController::actionAll();
+
 if (isset($_GET['cntr'])) {
 
     $news = $_GET['cntr'] . 'Controller';
@@ -14,4 +16,5 @@ if (isset($_GET['cntr'])) {
         }
     }
 }
+
 
