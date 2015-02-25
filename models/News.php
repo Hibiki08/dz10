@@ -4,6 +4,7 @@ class News {
 
     public $title;
     public $text;
+    public $id;
 
     public static function getAll() {
 
