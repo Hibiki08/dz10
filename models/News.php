@@ -2,7 +2,10 @@
 
 class News {
 
-    public function actionAll() {
+    public $title;
+    public $text;
+
+    public static function actionAll() {
 
         $res = new SQL;
         $sql = 'SELECT * FROM newss';
@@ -12,6 +15,19 @@ class News {
             $object_array[] = $ret;
         }
         return $object_array;
+    }
+
+    public static function actionOne() {
+
+        $all = self::actionAll();
+        var_dump($all);
+
+       foreach ($all as $values) {
+           if ($_GET['id'] == $values->id) {
+               echo $values->title;
+               echo $values->text;
+           }
+       }
     }
 }
 
