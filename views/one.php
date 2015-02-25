@@ -5,8 +5,8 @@
 </head>
 <body>
 
-    <h1><?php echo $object->title; ?></h1>
-    <p><?php echo $object->text; ?></p>
+    <h1><?php echo $values->title; ?></h1>
+    <p><?php echo $values->text; ?></p>
 
 </body>
 </html>
