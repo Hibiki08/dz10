@@ -10,6 +10,6 @@
                 <?php echo $object->title;  ?></a></li>
     <?php endforeach; ?>
         </ol>
-    <p><a href="controllers/AddController.php">Добавить новость:<a/></p>
+    <p><a href="controllers/AdminController.php">Добавить новость:<a/></p>
     </body>
 </html>
