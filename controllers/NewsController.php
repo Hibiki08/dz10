@@ -5,14 +5,18 @@ class NewsController {
 
     public static function actionAll() {
 
-        $array = News::getAll();
-        include_once __DIR__ . '/../views/all.php';
+        $news = News::getAll();
+
+        $all = new NewsViews();
+        $all->news($news, '/../views/all.php');
     }
 
     public static function actionOne() {
 
-        $news_one = News::getOne();
-        include_once __DIR__ . '/../views/one.php';
+        $news = News::getOne();
+
+        $all = new NewsViews();
+        $all->news($news, '/../views/one.php');
     }
 }
 
