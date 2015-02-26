@@ -5,8 +5,8 @@
 </head>
 <body>
 
-    <h1><?php echo $values->title; ?></h1>
-    <p><?php echo $values->text; ?></p>
+    <h1><?php echo $news_one['title']; ?></h1>
+    <p><?php echo $news_one['text']; ?></p>
 
 </body>
 </html>
