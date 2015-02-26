@@ -4,7 +4,7 @@
         <title>Все новости</title>
     </head>
     <body>
-        <form action="/../" method="post">
+        <form action="../controllers/AddController.php" method="post">
             <label>Название:<br/>
             <input type="text" name="title">
             </label><br/>
