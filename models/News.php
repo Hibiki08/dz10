@@ -18,16 +18,19 @@ class News {
         return $object_array;
     }
 
+
     public static function getOne() {
 
         $all = self::getAll();
 
        foreach ($all as $values) {
            if ($_GET['id'] == $values->id) {
-               echo $values->title;
-               echo $values->text;
+               $array['title'] = $values->title;
+               $array['text'] = $values->text;
            }
        }
+        return $array;
+
     }
 }
 
