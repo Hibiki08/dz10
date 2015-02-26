@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../autoload.php';
 
 class NewsController {
 
@@ -10,7 +11,18 @@ class NewsController {
 
     public static function actionOne() {
 
-        $array = News::getOne();
+        $news_one = News::getOne();
         include_once __DIR__ . '/../views/one.php';
     }
+}
+
+if (isset($_GET['cntr'])) {
+
+    $news = $_GET['cntr'] . 'Controller';
+
+        if (isset($_GET['act'])) {
+
+            $act = 'action' . $_GET['act'];
+            $news::$act();
+        }
 }
