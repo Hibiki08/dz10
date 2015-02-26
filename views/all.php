@@ -4,9 +4,12 @@
         <title>Все новости</title>
     </head>
     <body>
+        <ol>
     <?php  foreach ($array as $object): ?>
-        <h1><?php echo $object->title; ?></h1>
-        <p><?php echo $object->text; ?></p>
+        <li><a href="controllers/NewsController.php?cntr=News&act=One&id=<?php echo $object->id; ?>">
+                <?php echo $object->title;  ?></a></li>
     <?php endforeach; ?>
+        </ol>
+    <p><a href="controllers/AddController.php">Добавить новость:<a/></p>
     </body>
 </html>
