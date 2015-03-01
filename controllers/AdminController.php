@@ -12,5 +12,6 @@ elseif (!empty($_POST['title']) && !empty($_POST['text'])){
     header('Location: ../index.php');
 }
 
-include_once __DIR__ . '/../views/form.php';
+$form = new View;
+$form->display('form.php');
 
