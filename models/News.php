@@ -1,36 +1,25 @@
 <?php
 
-class News {
+class News
+{
 
     public $title;
     public $text;
     public $id;
 
-    public static function getAll() {
-
+    public static function getAll()
+    {
         $res = new SQL;
         $sql = 'SELECT * FROM newss';
-        $resource = $res->query($sql);
-
-        while ($ret = mysql_fetch_object($resource, 'News')) {
-            $object_array[] = $ret;
-        }
-        return $object_array;
+        return $res->queryAll($sql);
     }
 
 
-    public static function getOne() {
-
-        $all = self::getAll();
-
-       foreach ($all as $values) {
-           if ($_GET['id'] == $values->id) {
-               $array['title'] = $values->title;
-               $array['text'] = $values->text;
-           }
-       }
-        return $array;
-
+    public static function getOne($id)
+    {
+        $res = new SQL;
+        $sql = 'SELECT * FROM newss WHERE id=' . $id;
+        return $res->queryOne($sql);
     }
 }
 
