@@ -1,32 +1,23 @@
 <?php
-require_once __DIR__ . '/../autoload.php';
 
 class NewsController {
 
-    public static function actionAll() {
+    public function actionAll() {
 
         $news = News::getAll();
 
-        $all = new NewsViews();
-        $all->news($news, '/../views/all.php');
+        $all = new View();
+        $all->items = $news;
+        $all->display('all.php');
     }
 
-    public static function actionOne() {
+    public function actionOne() {
 
-        $news = News::getOne();
+        $id = $_GET['id'];
+        $news = News::getOne($id);
 
-        $all = new NewsViews();
-        $all->news($news, '/../views/one.php');
+        $one = new View();
+        $one->items = $news;
+        $one->display('one.php');
     }
-}
-
-if (isset($_GET['cntr'])) {
-
-    $news = $_GET['cntr'] . 'Controller';
-
-        if (isset($_GET['act'])) {
-
-            $act = 'action' . $_GET['act'];
-            $news::$act();
-        }
 }
