@@ -6,8 +6,8 @@
     <body>
         <ol>
     <?php
-    foreach ($news as $object): ?>
-        <li><a href="controllers/NewsController.php?cntr=News&act=One&id=<?php echo $object->id; ?>">
+    foreach ($items as $object): ?>
+        <li><a href="index.php?act=One&id=<?php echo $object->id; ?>">
                 <?php echo $object->title;  ?></a></li>
     <?php endforeach; ?>
         </ol>
