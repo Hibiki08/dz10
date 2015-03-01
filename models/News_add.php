@@ -6,7 +6,7 @@ class News_add {
         $res = new SQL;
         $sql = "INSERT INTO newss (title, text) VALUES ('" . $_POST['title'] . "'" . "," .
             "'" . $_POST['text'] . "')";
-        $res->query($sql);
+        $res->queryAll($sql);
     }
 
 } 
