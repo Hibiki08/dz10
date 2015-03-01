@@ -1,19 +1,11 @@
 <?php
 require_once __DIR__ . '/autoload.php';
 
-if (isset($_GET['cntr'])) {
+$ctrl = isset($_GET['ctrl']) ? $_GET['ctrl'] : 'News';
+$act = isset($_GET['act']) ? $_GET['act'] : 'All';
 
-    $news = $_GET['cntr'] . 'Controller';
-}
+$controllerName = $ctrl . 'Controller';
+$action = 'action' . $act;
 
-elseif (isset($_GET['act'])) {
-
-    $act = 'action' . $_GET['act'];
-    $news::$act();
-}
-
-NewsController::actionAll();
-
-
-
-
+$controller = new $controllerName;
+$controller->$action();
