@@ -8,7 +8,18 @@ class SQL
         mysql_select_db('ШП');
     }
 
-    public function query($sql) {
-        return mysql_query($sql);
+    public function queryAll($sql) {
+
+        $resource = mysql_query($sql);
+
+        while ($ret = mysql_fetch_object($resource, 'News')) {
+            $object_array[] = $ret;
+        }
+        return $object_array;
+    }
+
+    public function queryOne($sql) {
+
+        return $this->queryAll($sql)[0];
     }
 }
