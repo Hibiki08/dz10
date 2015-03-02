@@ -1,16 +1,34 @@
 <?php
 require_once __DIR__ . '/../autoload.php';
 
+class AdminController
+{
+
+    public function AddNews() {
+
 if ((!empty($_POST)) &&
-    (empty($_POST['title']) || empty($_POST['text']))) {
+(empty($_POST['title']) || empty($_POST['text'])))
+{
 
-        echo 'Не все поля заполнены!';
+echo 'Не все поля заполнены!';
 }
-elseif (!empty($_POST['title']) && !empty($_POST['text'])){
 
-    News_add::add();
+elseif
+(!empty($_POST['title']) && !empty($_POST['text'])) {
+
+    $items = new News_add;
+
+    $items->title = $_POST['title'];
+    $items->text = $_POST['text'];
+
+    $items->add();
     header('Location: ../index.php');
 }
+}
+}
+
+$admin = new AdminController;
+$admin->AddNews();
 
 $form = new View;
 $form->display('form.php');
