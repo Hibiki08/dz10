@@ -11,6 +11,6 @@
                 <?php echo $object->title;  ?></a></li>
     <?php endforeach; ?>
         </ol>
-    <p><a href="controllers/AdminController.php">Добавить новость:<a/></p>
+    <p><a href="index.php?ctrl=Admin&act=Add">Добавить новость:<a/></p>
     </body>
 </html>
