@@ -1,12 +1,16 @@
 <?php
 
 class News_add {
-    public static function add() {
+
+    public $title;
+    public $text;
+
+    public function add() {
 
         $res = new SQL;
-        $sql = "INSERT INTO newss (title, text) VALUES ('" . $_POST['title'] . "'" . "," .
-            "'" . $_POST['text'] . "')";
-        $res->queryAll($sql);
+        $sql = "INSERT INTO newss (title, text) VALUES ('" . $this->title . "'" . "," .
+            "'" . $this->text . "')";
+        mysql_query($sql);
     }
 
 } 
