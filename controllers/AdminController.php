@@ -1,10 +1,11 @@
 <?php
+
 require_once __DIR__ . '/../autoload.php';
 
 class AdminController
 {
 
-    public function AddNews() {
+    public function actionAdd() {
 
 if ((!empty($_POST)) &&
 (empty($_POST['title']) || empty($_POST['text'])))
@@ -27,8 +28,8 @@ elseif
 }
 }
 
-$admin = new AdminController;
-$admin->AddNews();
+$admin = new AdminController();
+$admin->actionAdd();
 
 $form = new View;
 $form->display('form.php');
