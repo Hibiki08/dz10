@@ -1,23 +1,67 @@
 <?php
 
-class NewsController {
+class NewsController
+{
 
-    public function actionAll() {
+    public function actionAll()
+    {
 
-        $news = News::getAll();
+        $view = new View;
+        $view->display('search.php');
 
-        $all = new View();
-        $all->items = $news;
-        $all->display('all.php');
+        $view->data = News::findAll();;
+
+        $view->display('all.php');
     }
 
-    public function actionOne() {
+    public function actionOne()
+    {
 
         $id = $_GET['id'];
-        $news = News::getOne($id);
 
-        $one = new View();
-        $one->items = $news;
-        $one->display('one.php');
+        $view = new View();
+        $view->data = News::findByID($id);
+        $view->display('one.php');
+    }
+
+    public function actionFind()
+    {
+
+        if (!empty($_POST) && isset($_POST['searchTitle'])) {
+
+            $items = new News;
+            $column = 'title';
+            $value = $_POST['searchTitle'];
+
+            $res = $items->findByColumn($column, $value);
+
+            if ($res == true) {
+
+                $view = new View();
+                $view->data = $res;
+                $view->display('all.php');
+            } else {
+                echo 'Новость не найдена!';
+            }
+        }
+
+        if (!empty($_POST) && isset($_POST['searchText'])) {
+
+            $items = new News;
+            $column = 'text';
+            $value = $_POST['searchText'];
+
+            $res = $items->findByColumn($column, $value);
+
+            if ($res == true) {
+
+                $view = new View();
+                $view->data = $res;
+                $view->display('all.php');
+            } else {
+                echo 'Новость не найдена!';
+            }
+        }
+
     }
 }
