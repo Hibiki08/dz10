@@ -6,9 +6,9 @@
     <body>
         <ol>
     <?php
-    foreach ($items as $object): ?>
-        <li><a href="index.php?act=One&id=<?php echo $object->id; ?>">
-                <?php echo $object->title;  ?></a></li>
+    foreach ($value as $val): ?>
+        <li><a href="index.php?act=One&id=<?php echo $val['id']; ?>">
+                <?php echo $val['title'];  ?></a></li>
     <?php endforeach; ?>
         </ol>
     <p><a href="index.php?ctrl=Admin&act=Add">Добавить новость:<a/></p>
