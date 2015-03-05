@@ -5,8 +5,10 @@
 </head>
 <body>
 
-    <h1><?php echo $items->title; ?></h1>
-    <p><?php echo $items->text; ?></p>
+    <h1><?php echo $val['title']; ?></h1>
+    <p><?php echo $val['text']; ?></p>
+    <p><a href="index.php?ctrl=Admin&act=Upd&id=<?php echo $val['id']; ?>">Изменить:<a/></p>
+    <p><a href="index.php?ctrl=Admin&act=Dell&id=<?php echo $val['id']; ?>">Удалить:<a/></p>
 
 </body>
 </html>
