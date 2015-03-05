@@ -1,23 +1,11 @@
 <?php
 
 class News
-    implements IModel
-{
+    extends AbstractModel {
 
-    public static function getAll()
-    {
-        $res = new SQL;
-        $sql = 'SELECT * FROM newss';
-        return $res->queryAll($sql);
-    }
-
-
-    public static function getOne($id)
-    {
-        $res = new SQL;
-        $sql = 'SELECT * FROM newss WHERE id=' . $id;
-        return $res->queryOne($sql);
-    }
+    protected static $table = 'newss';
+    protected static $idName;
 }
+
 
 
