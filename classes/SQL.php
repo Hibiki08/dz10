@@ -1,25 +1,30 @@
 <?php
 
-class SQL
-{
+class SQL {
+
+    private $dbh;
+    private $class = 'stdClass';
+
     public function __construct()
     {
-        mysql_connect('localhost', 'root', '');
-        mysql_select_db('ШП');
+       $this->dbh = new PDO('mysql:dbname=ШП;host=localhost', 'root', '');
     }
 
-    public function queryAll($sql) {
+    public function className($className) {
 
-        $resource = mysql_query($sql);
-
-        while ($ret = mysql_fetch_object($resource, 'News')) {
-            $object_array[] = $ret;
-        }
-        return $object_array;
+        $this->class = $className;
     }
 
-    public function queryOne($sql) {
+    public function query($sql, $parameters=[]) {
 
-        return $this->queryAll($sql)[0];
+        $res = $this->dbh->prepare($sql);
+        $res->execute($parameters);
+        return $res->fetchAll(PDO::FETCH_CLASS, $this->class);
+    }
+
+    public function queryOther($sql, $parameters=[]) {
+
+        $res = $this->dbh->prepare($sql);
+        return $res->execute($parameters);
     }
 }
