@@ -17,20 +17,51 @@ echo 'Не все поля заполнены!';
 elseif
 (!empty($_POST['title']) && !empty($_POST['text'])) {
 
-    $items = new News_add;
+    $items = new News;
 
     $items->title = $_POST['title'];
     $items->text = $_POST['text'];
 
-    $items->add();
-    header('Location: ../index.php');
+    $items->insert();
+    header('Location: index.php');
 }
-}
+        $form = new View;
+        $form->display('form.php');
 }
 
-$admin = new AdminController();
-$admin->actionAdd();
+    public function actionUpd() {
 
-$form = new View;
-$form->display('form.php');
+        $id = $_GET['id'];
+
+            if (!empty($_POST)) {
+
+                $items = new News;
+
+                $title1 = 'title';
+                $title1_val = $_POST['title'];
+                $title2 = 'text';
+                $title2_val = $_POST['text'];
+
+                $items->update($title1, $title1_val, $title2, $title2_val, $id);
+                header('Location: index.php');
+            }
+
+        $form = new View;
+        $form->data = News::findByID($id);
+
+        $form->display('form.php');
+        }
+
+    public function actionDell() {
+
+        $id = $_GET['id'];
+
+        $items = new News;
+        $items->delete($id);
+        header('Location: index.php');
+    }
+
+}
+
+
 
