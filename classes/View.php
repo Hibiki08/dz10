@@ -2,6 +2,7 @@
 
 class View {
 
+    public $error;
     public $data = [];
 
     public function display($path) {
