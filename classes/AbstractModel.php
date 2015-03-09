@@ -2,7 +2,6 @@
 
 abstract class AbstractModel {
 
-    protected static $idName =[];
     protected static $table;
     public $data=[];
 
@@ -33,7 +32,12 @@ abstract class AbstractModel {
 
         $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
         $parameters = [':id' => $id];
-        return $query->query($sql, $parameters)[0];
+        $res = $query->query($sql, $parameters);
+        if (empty($res)) {
+            throw new E404Exception('Новость не найдена!');
+            die;
+        }
+        return $res[0];
     }
 
     public static function findByColumn($column, $value) {
@@ -44,12 +48,16 @@ abstract class AbstractModel {
 
         $sql = 'SELECT * FROM ' . static::$table . ' WHERE ' . $column . '=:value';
         $parameters = [':value' => $value];
-
-        return $query->query($sql, $parameters);
+        $res =  $query->query($sql, $parameters);
+        if (empty($res)) {
+            throw new E404Exception('Новость не найдена!');
+            die;
+        }
+        return $res[0];
     }
 
 
-    public function insert() {
+    protected function insert() {
 
         $keys = array_keys($this->data);
 
@@ -66,25 +74,41 @@ abstract class AbstractModel {
         $query->queryOther($sql, $datas);
     }
 
-    public function update($title1, $title1_val, $title2, $title2_val, $id) {
+    protected function update() {
+
+        $datas = [];
+        $cols = [];
+        foreach ($this->data as $k => $v) {
+            $datas[':' . $k] = $v;
+            if ($k == 'id') {
+                continue;
+            }
+            $cols[] = $k . '=:' . $k;
+        }
 
         $query = new SQL;
         $sql = 'UPDATE ' . static::$table .
-        ' SET ' . $title1 . '=:title, ' . $title2 . '=:text' .
+        ' SET ' . implode(', ', $cols) .
         ' WHERE id=:id';
-        $parameters = [':title' => $title1_val,
-            ':text' => $title2_val,
-            ':id' => $id];
 
-        return $query->queryOther($sql, $parameters);
+        return $query->queryOther($sql, $datas);
     }
 
-    public function delete($id) {
+    public function delete() {
 
-        $sql = 'DELETE FROM ' . static::$table . ' WHERE id=' . $id;
+        $sql = 'DELETE FROM ' . static::$table . ' WHERE id=:id';
 
         $query = new SQl;
-        $query->queryOther($sql);
+        $query->queryOther($sql, [':id' => $this->data['id']] );
+    }
+
+    public function save() {
+        if (!isset($this->data['id'])) {
+            $this->insert();
+        }
+        else {
+            $this->update();
+        }
     }
 
 
