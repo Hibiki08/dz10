@@ -22,7 +22,7 @@ elseif
     $items->title = $_POST['title'];
     $items->text = $_POST['text'];
 
-    $items->insert();
+    $items->save();
     header('Location: index.php');
 }
         $form = new View;
@@ -35,14 +35,11 @@ elseif
 
             if (!empty($_POST)) {
 
-                $items = new News;
+                $items = News::findByID($id);
+                $items->title = $_POST['title'];
+                $items->text = $_POST['text'];
+                $items->save();
 
-                $title1 = 'title';
-                $title1_val = $_POST['title'];
-                $title2 = 'text';
-                $title2_val = $_POST['text'];
-
-                $items->update($title1, $title1_val, $title2, $title2_val, $id);
                 header('Location: index.php');
             }
 
@@ -56,12 +53,13 @@ elseif
 
         $id = $_GET['id'];
 
-        $items = new News;
-        $items->delete($id);
+        $items = News::findByID($id);
+        $items->delete();
         header('Location: index.php');
     }
 
 }
+
 
 
 
