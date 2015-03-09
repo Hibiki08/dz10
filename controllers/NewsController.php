@@ -5,7 +5,6 @@ class NewsController
 
     public function actionAll()
     {
-
         $view = new View;
         $view->display('search.php');
 
